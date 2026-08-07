@@ -1,375 +1,105 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AcademiaPL Aragón - Academia de Oposiciones Policía Local</title>
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, system-ui, sans-serif; background: #fff; color: #0a0a0a; line-height: 1.6; }
-.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-.navbar { border-bottom: 1px solid #eee; padding: 18px 0; position: sticky; top: 0; background: #fff; z-index: 100; }
-.nav-inner { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-size: 20px; font-weight: 800; color: #003366; letter-spacing: -0.5px; }
-.nav-links { display: flex; gap: 32px; align-items: center; }
-.nav-links a { color: #333; text-decoration: none; font-size: 14px; font-weight: 500; }
-.nav-links a:hover { color: #003366; }
-.btn-nav { background: #003366; color: #fff !important; padding: 10px 20px; border-radius: 6px; }
-.hero { padding: 90px 0 70px; text-align: center; background: linear-gradient(180deg, #f8fafc 0%, #fff 100%); }
-.hero h1 { font-size: 46px; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 20px; color: #0a0a0a; }
-.hero .highlight { color: #003366; }
-.hero p.sub { font-size: 18px; color: #555; max-width: 640px; margin: 0 auto 32px; }
-.hero-cta { display: flex; gap: 14px; justify-content: center; margin-bottom: 20px; }
-.btn-primary { background: #003366; color: #fff; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; border: none; cursor: pointer; }
-.btn-secondary { background: #fff; color: #003366; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; border: 1.5px solid #003366; cursor: pointer; }
-.hero-note { font-size: 13px; color: #999; }
-.municipios { padding: 40px 0; border-bottom: 1px solid #eee; border-top: 1px solid #eee; }
-.municipios-inner { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
-.municipio-tag { background: #f0f4f8; color: #003366; padding: 10px 20px; border-radius: 20px; font-size: 14px; font-weight: 600; }
-.section { padding: 80px 0; }
-.section-title { text-align: center; margin-bottom: 56px; }
-.section-title h2 { font-size: 34px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
-.section-title p { color: #666; font-size: 16px; max-width: 560px; margin: 0 auto; }
-.ventajas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-.ventaja-card { background: #f8f9fb; border: 1px solid #eee; border-radius: 14px; padding: 32px; }
-.ventaja-icon { font-size: 28px; margin-bottom: 16px; display: block; }
-.ventaja-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
-.ventaja-card p { color: #666; font-size: 14px; }
-.servicios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.servicio-card { border: 1px solid #eee; border-radius: 14px; padding: 28px; transition: all 0.2s; }
-.servicio-card:hover { border-color: #003366; box-shadow: 0 4px 20px rgba(0,51,102,0.08); }
-.servicio-icon { width: 44px; height: 44px; background: #e8f0ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; }
-.servicio-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
-.servicio-card p { color: #666; font-size: 13px; line-height: 1.6; }
-.sobre-mi { background: #003366; color: #fff; padding: 70px 0; }
-.sobre-mi-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-.sobre-mi h2 { font-size: 30px; font-weight: 800; margin-bottom: 18px; letter-spacing: -0.5px; }
-.sobre-mi p { color: #cdd9e8; font-size: 15px; margin-bottom: 14px; }
-.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-.stat-box { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 24px; text-align: center; }
-.stat-box .num { font-size: 32px; font-weight: 800; display: block; }
-.stat-box .label { font-size: 12px; color: #cdd9e8; margin-top: 4px; }
-.precios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.precio-card { border: 1.5px solid #eee; border-radius: 16px; padding: 36px 28px; text-align: center; }
-.precio-card.featured { border-color: #003366; position: relative; transform: scale(1.03); box-shadow: 0 8px 30px rgba(0,51,102,0.12); }
-.precio-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #003366; color: #fff; font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 20px; }
-.precio-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-.precio-card .desc { color: #888; font-size: 13px; margin-bottom: 20px; }
-.precio-card .price { font-size: 38px; font-weight: 800; color: #003366; }
-.precio-card .price span { font-size: 15px; font-weight: 500; color: #888; }
-.precio-list { list-style: none; margin: 24px 0; text-align: left; }
-.precio-list li { padding: 8px 0; font-size: 13px; color: #555; }
-.precio-list li:before { content: "✓ "; color: #003366; font-weight: 700; }
-.btn-precio { display: block; width: 100%; padding: 12px; background: #003366; color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px; }
-.cta-final { background: #f8f9fb; padding: 70px 0; text-align: center; }
-.cta-final h2 { font-size: 30px; font-weight: 800; margin-bottom: 14px; }
-.cta-final p { color: #666; margin-bottom: 28px; }
-footer { border-top: 1px solid #eee; padding: 40px 0; text-align: center; }
-footer p { color: #999; font-size: 13px; margin-bottom: 8px; }
-footer a { color: #003366; text-decoration: none; }
-.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-.modal-overlay.active { display: flex; }
-.modal-box { background: #fff; border-radius: 16px; padding: 40px; max-width: 400px; width: 100%; position: relative; }
-.modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 20px; cursor: pointer; color: #999; }
-.modal-box h2 { font-size: 24px; font-weight: 800; margin-bottom: 6px; }
-.modal-box p.sub { color: #666; font-size: 14px; margin-bottom: 24px; }
-.form-group { margin-bottom: 16px; text-align: left; }
-.form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-.form-group input { width: 100%; padding: 11px 14px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; }
-.form-group input:focus { outline: none; border-color: #003366; }
-.btn-modal-submit { width: 100%; padding: 13px; background: #003366; color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 8px; font-size: 14px; }
-.dashboard { display: none; grid-template-columns: 240px 1fr; min-height: 100vh; }
-.dashboard.active { display: grid; }
-.sidebar { background: #f8f9fb; border-right: 1px solid #eee; padding: 28px 0; display: flex; flex-direction: column; }
-.sidebar-header { padding: 0 24px; margin-bottom: 36px; }
-.sidebar-header .logo { font-size: 17px; }
-.sidebar-header p { font-size: 12px; color: #999; margin-top: 4px; }
-.nav-btn { padding: 13px 24px; border: none; background: transparent; color: #555; font-size: 14px; text-align: left; cursor: pointer; border-left: 3px solid transparent; width: 100%; font-family: inherit; }
-.nav-btn.active { background: #e8f0ff; color: #003366; font-weight: 700; border-left-color: #003366; }
-.nav-btn:hover:not(.active) { background: #eef1f5; }
-.main { padding: 48px; overflow-y: auto; }
-.main h1 { font-size: 30px; font-weight: 800; margin-bottom: 8px; }
-.main > p.lead { color: #666; margin-bottom: 32px; }
-.dash-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.dash-card { background: #f8f9fb; border: 1px solid #eee; border-radius: 12px; padding: 24px; text-align: center; }
-.dash-card .price { font-size: 22px; font-weight: 800; color: #003366; }
-.logout-wrap { border-top: 1px solid #eee; padding: 16px 24px; margin-top: auto; }
-.btn-logout { width: 100%; padding: 10px; background: #fff; border: 1px solid #ddd; color: #666; cursor: pointer; border-radius: 8px; font-size: 13px; }
-@media (max-width: 900px) {
-  .nav-links { display: none; }
-  .hero h1 { font-size: 32px; }
-  .ventajas-grid, .servicios-grid, .precios-grid { grid-template-columns: 1fr; }
-  .sobre-mi-inner { grid-template-columns: 1fr; }
-  .dashboard.active { grid-template-columns: 1fr; }
-  .sidebar { display: none; }
-  .precio-card.featured { transform: none; }
-}
-</style>
-</head>
-<body>
-<div id="landing">
-  <nav class="navbar">
-    <div class="container nav-inner">
-      <div class="logo">AcademiaPL <span style="color:#666;font-weight:600;">Aragón</span></div>
-      <div class="nav-links">
-        <a href="#ventajas">Por qué elegirnos</a>
-        <a href="#servicios">Qué incluye</a>
-        <a href="#precios">Precios</a>
-        <a href="#contacto">Contacto</a>
-        <a href="#" class="btn-nav" onclick="openModal(); return false;">Acceso alumnos</a>
-      </div>
-    </div>
-  </nav>
-  <section class="hero">
-    <div class="container">
-      <h1>Prepara tu plaza de<br><span class="highlight">Policía Local en Aragón</span></h1>
-      <p class="sub">Convocatoria Unificada, Zaragoza, Huesca y Teruel. Formación teórica, práctica, psicotécnica y física con acompañamiento desde el primer día.</p>
-      <div class="hero-cta">
-        <a href="#precios" class="btn-primary">Ver planes y precios</a>
-        <a href="#" class="btn-secondary" onclick="openModal(); return false;">Acceso alumnos</a>
-      </div>
-      <p class="hero-note">Desde 19,99€/mes · Sin permanencia</p>
-    </div>
-  </section>
-  <section class="municipios">
-    <div class="container municipios-inner">
-      <div class="municipio-tag">📋 Convocatoria Unificada</div>
-      <div class="municipio-tag">📍 Zaragoza</div>
-      <div class="municipio-tag">📍 Huesca</div>
-      <div class="municipio-tag">📍 Teruel</div>
-    </div>
-  </section>
-  <section class="section" id="ventajas">
-    <div class="container">
-      <div class="section-title">
-        <h2>Por qué prepararte con nosotros</h2>
-        <p>Un método pensado para quien quiere aprobar, no solo estudiar</p>
-      </div>
-      <div class="ventajas-grid">
-        <div class="ventaja-card">
-          <span class="ventaja-icon">🎯</span>
-          <h3>Seguimiento desde el minuto 1</h3>
-          <p>No estás solo. Te acompañamos desde el primer día de preparación hasta el examen, resolviendo dudas y ajustando tu plan de estudio.</p>
-        </div>
-        <div class="ventaja-card">
-          <span class="ventaja-icon">🧩</span>
-          <h3>Preparación global de la oposición</h3>
-          <p>Teoría, práctica, psicotécnicos y pruebas físicas. Trabajamos todas las fases del proceso selectivo, no solo el temario.</p>
-        </div>
-        <div class="ventaja-card">
-          <span class="ventaja-icon">👮</span>
-          <h3>Contenido de un profesional en activo</h3>
-          <p>24 años de experiencia policial y formación en Derecho. El material está creado por quien conoce la profesión desde dentro.</p>
-        </div>
-        <div class="ventaja-card">
-          <span class="ventaja-icon">💬</span>
-          <h3>Atención personalizada</h3>
-          <p>Resolución directa de dudas. Cada pregunta se responde de forma individual, sin respuestas genéricas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section" id="servicios" style="background:#fafbfc;">
-    <div class="container">
-      <div class="section-title">
-        <h2>Todo lo que necesitas para aprobar</h2>
-        <p>Un sistema completo de preparación, en un solo lugar</p>
-      </div>
-      <div class="servicios-grid">
-        <div class="servicio-card">
-          <div class="servicio-icon">📚</div>
-          <h3>Temario explicado</h3>
-          <p>Textos legales explicados con ejemplos reales. Resúmenes, tablas y material didáctico pensado para memorizar y entender, no solo leer.</p>
-        </div>
-        <div class="servicio-card">
-          <div class="servicio-icon">✏️</div>
-          <h3>Test por temas y bloques</h3>
-          <p>Preguntas adaptadas a cada oposición objetivo, con justificación de la respuesta correcta. Elige tema, número de preguntas y si penalizan errores.</p>
-        </div>
-        <div class="servicio-card">
-          <div class="servicio-icon">🔍</div>
-          <h3>Casos prácticos resueltos</h3>
-          <p>Supuestos reales de actuación policial resueltos paso a paso, con la fundamentación legal correspondiente.</p>
-        </div>
-        <div class="servicio-card">
-          <div class="servicio-icon">💪</div>
-          <h3>Plan de entrenamiento físico</h3>
-          <p>Preparación específica para superar con garantías la parte física del proceso selectivo.</p>
-        </div>
-        <div class="servicio-card">
-          <div class="servicio-icon">📋</div>
-          <h3>Exámenes oficiales</h3>
-          <p>Pruebas de convocatorias anteriores, con resultados y corrección, para que practiques en condiciones reales.</p>
-        </div>
-        <div class="servicio-card">
-          <div class="servicio-icon">💬</div>
-          <h3>Dudas resueltas</h3>
-          <p>Canal directo de contacto para resolver cualquier duda sobre el temario o el proceso selectivo.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="sobre-mi">
-    <div class="container sobre-mi-inner">
-      <div>
-        <h2>Formación creada por un profesional en activo</h2>
-        <p>Soy Oficial de la Policía Local, responsable de la Unidad de Tráfico y Seguridad Vial, con 24 años de experiencia en el cuerpo y graduado en Derecho.</p>
-        <p>He preparado a decenas de opositores a Policía Local en Aragón, y he creado esta academia para ofrecer una preparación completa, actualizada y con acompañamiento real durante todo el proceso.</p>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-box"><span class="num">24</span><span class="label">Años en la Policía</span></div>
-        <div class="stat-box"><span class="num">4</span><span class="label">Convocatorias cubiertas</span></div>
-        <div class="stat-box"><span class="num">100%</span><span class="label">Online</span></div>
-        <div class="stat-box"><span class="num">1º</span><span class="label">Trato directo y cercano</span></div>
-      </div>
-    </div>
-  </section>
-  <section class="section" id="precios">
-    <div class="container">
-      <div class="section-title">
-        <h2>Elige tu plan</h2>
-        <p>Empieza con la Unificada y añade tu convocatoria municipal cuando quieras</p>
-      </div>
-      <div class="precios-grid">
-        <div class="precio-card">
-          <h3>Unificada</h3>
-          <p class="desc">Convocatoria Unificada de Aragón</p>
-          <p class="price">19,99€<span>/mes</span></p>
-          <ul class="precio-list">
-            <li>Temario completo unificada</li>
-            <li>Tests ilimitados</li>
-            <li>Casos prácticos</li>
-            <li>Exámenes oficiales</li>
-          </ul>
-          <button class="btn-precio" onclick="openModal()">Empezar ahora</button>
-        </div>
-        <div class="precio-card featured">
-          <span class="precio-badge">MÁS ELEGIDO</span>
-          <h3>Unificada + 1 municipio</h3>
-          <p class="desc">Elige Zaragoza, Huesca o Teruel</p>
-          <p class="price">29,99€<span>/mes</span></p>
-          <ul class="precio-list">
-            <li>Todo lo de Unificada</li>
-            <li>Temario municipal específico</li>
-            <li>Tests del municipio elegido</li>
-            <li>Atención personalizada</li>
-          </ul>
-          <button class="btn-precio" onclick="openModal()">Empezar ahora</button>
-        </div>
-        <div class="precio-card">
-          <h3>Todo incluido</h3>
-          <p class="desc">Unificada + Zaragoza + Huesca + Teruel</p>
-          <p class="price">39,99€<span>/mes</span></p>
-          <ul class="precio-list">
-            <li>Acceso a las 4 convocatorias</li>
-            <li>Todo el contenido disponible</li>
-            <li>Plan de entrenamiento físico</li>
-            <li>Atención prioritaria</li>
-          </ul>
-          <button class="btn-precio" onclick="openModal()">Empezar ahora</button>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="cta-final" id="contacto">
-    <div class="container">
-      <h2>¿Tienes dudas antes de empezar?</h2>
-      <p>Escríbenos y te resolvemos cualquier pregunta sobre la preparación</p>
-      <a href="mailto:info@academiaplaragon.com" class="btn-primary">info@academiaplaragon.com</a>
-    </div>
-  </section>
-  <footer>
-    <div class="container">
-      <p><strong>AcademiaPL Aragón</strong> — Preparación de oposiciones a Policía Local</p>
-      <p>Unificada · Zaragoza · Huesca · Teruel</p>
-      <p><a href="mailto:info@academiaplaragon.com">info@academiaplaragon.com</a></p>
-      <p style="margin-top:16px;">© 2026 AcademiaPL Aragón</p>
-    </div>
-  </footer>
-</div>
-<div class="modal-overlay" id="loginModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <h2>Acceso alumnos</h2>
-    <p class="sub">Entra con tu cuenta para acceder al contenido</p>
-    <form id="loginForm">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="loginEmail" required placeholder="tu@email.com">
-      </div>
-      <div class="form-group">
-        <label>Contraseña</label>
-        <input type="password" id="loginPass" required placeholder="••••••••">
-      </div>
-      <button type="submit" class="btn-modal-submit">Acceder</button>
-    </form>
-  </div>
-</div>
-<div class="dashboard" id="dashboard">
-  <div class="sidebar">
-    <div class="sidebar-header">
-      <div class="logo">AcademiaPL</div>
-      <p>Aragón</p>
-    </div>
-    <nav id="dashNav"></nav>
-    <div class="logout-wrap">
-      <button class="btn-logout" onclick="logout()">Cerrar sesión</button>
-    </div>
-  </div>
-  <div class="main" id="dashMain"></div>
-</div>
-<script>
-function openModal() {
-  document.getElementById('loginModal').classList.add('active');
-}
-function closeModal() {
-  document.getElementById('loginModal').classList.remove('active');
-}
-const sections = [
-  { id: 'inicio', label: 'Inicio', icon: '📊' },
-  { id: 'temario', label: 'Temario', icon: '📚' },
-  { id: 'tests', label: 'Tests', icon: '✏️' },
-  { id: 'practicos', label: 'Casos Prácticos', icon: '🔍' },
-  { id: 'examenes', label: 'Exámenes Oficiales', icon: '📋' },
-  { id: 'contacto', label: 'Contacto', icon: '📧' }
-];
-let currentSection = 'inicio';
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  closeModal();
-  document.getElementById('landing').style.display = 'none';
-  document.getElementById('dashboard').classList.add('active');
-  renderDash();
-});
-function logout() {
-  document.getElementById('dashboard').classList.remove('active');
-  document.getElementById('landing').style.display = 'block';
-  currentSection = 'inicio';
-}
-function setSection(id) {
-  currentSection = id;
-  renderDash();
-}
-function renderDash() {
-  const nav = document.getElementById('dashNav');
-  nav.innerHTML = sections.map(s =>
-    `<button class="nav-btn ${currentSection === s.id ? 'active' : ''}" onclick="setSection('${s.id}')">${s.icon} ${s.label}</button>`
-  ).join('');
-  const main = document.getElementById('dashMain');
-  if (currentSection === 'inicio') {
-    main.innerHTML = `<h1>Bienvenido a AcademiaPL Aragón</h1><p class="lead">Te acompañamos en la preparación de tu futuro en la Policía Local de Aragón</p><div class="dash-grid-3"><div class="dash-card"><h3>Unificada</h3><p class="price">19,99€/mes</p></div><div class="dash-card"><h3>Unificada + Una</h3><p class="price">29,99€/mes</p></div><div class="dash-card"><h3>Todo incluido</h3><p class="price">39,99€/mes</p></div></div>`;
-  } else if (currentSection === 'temario') {
-    main.innerHTML = `<h1>Temario</h1><p class="lead">Textos legales explicados con ejemplos, resúmenes y tablas para memorizar y entender. Descargas en PDF organizadas por temas y bloques.</p>`;
-  } else if (currentSection === 'tests') {
-    main.innerHTML = `<h1>Generador de Tests</h1><p class="lead">Elige tema, bloque, número de preguntas y si penalizan errores. Cada respuesta incluye su justificación.</p>`;
-  } else if (currentSection === 'practicos') {
-    main.innerHTML = `<h1>Casos Prácticos</h1><p class="lead">Supuestos reales de actuación policial, resueltos y fundamentados legalmente.</p>`;
-  } else if (currentSection === 'examenes') {
-    main.innerHTML = `<h1>Exámenes Oficiales</h1><p class="lead">Pruebas de convocatorias anteriores con resultados y corrección.</p>`;
-  } else if (currentSection === 'contacto') {
-    main.innerHTML = `<h1>Contacto</h1><p class="lead">info@academiaplaragon.com</p>`;
-  }
-}
-</script>
-</body>
-</html>
+AcademiaPL Aragón
+Prepara tu plaza de Policía Local en Aragón
+Convocatoria Unificada, Zaragoza, Huesca y Teruel. Formación teórica, práctica, psicotécnica y física con acompañamiento desde el primer día.
+Ver planes y precios
+Acceso alumnos
+Desde 19,99€/mes · Sin permanencia
+📋 Convocatoria Unificada
+📍 Zaragoza
+📍 Huesca
+📍 Teruel
+Por qué prepararte con nosotros
+Un método pensado para quien quiere aprobar, no solo estudiar
+🎯
+Seguimiento desde el minuto 1
+No estás solo. Te acompañamos desde el primer día de preparación hasta el examen, resolviendo dudas y ajustando tu plan de estudio.
+🧩
+Preparación global de la oposición
+Teoría, práctica, psicotécnicos y pruebas físicas. Trabajamos todas las fases del proceso selectivo, no solo el temario.
+👮
+Contenido de un profesional en activo
+24 años de experiencia policial y formación en Derecho. El material está creado por quien conoce la profesión desde dentro.
+💬
+Atención personalizada
+Resolución directa de dudas. Cada pregunta se responde de forma individual, sin respuestas genéricas.
+Todo lo que necesitas para aprobar
+Un sistema completo de preparación, en un solo lugar
+📚
+Temario explicado
+Textos legales explicados con ejemplos reales. Resúmenes, tablas y material didáctico pensado para memorizar y entender, no solo leer.
+✏️
+Test por temas y bloques
+Preguntas adaptadas a cada oposición objetivo, con justificación de la respuesta correcta. Elige tema, número de preguntas y si penalizan errores.
+🔍
+Casos prácticos resueltos
+Supuestos reales de actuación policial resueltos paso a paso, con la fundamentación legal correspondiente.
+💪
+Plan de entrenamiento físico
+Preparación específica para superar con garantías la parte física del proceso selectivo.
+📋
+Exámenes oficiales
+Pruebas de convocatorias anteriores, con resultados y corrección, para que practiques en condiciones reales.
+💬
+Dudas resueltas
+Canal directo de contacto para resolver cualquier duda sobre el temario o el proceso selectivo.
+Formación creada por un profesional en activo
+Soy Oficial de la Policía Local, responsable de la Unidad de Tráfico y Seguridad Vial, con 24 años de experiencia en el cuerpo y graduado en Derecho.
+He preparado a decenas de opositores a Policía Local en Aragón, y he creado esta academia para ofrecer una preparación completa, actualizada y con acompañamiento real durante todo el proceso.
+24
+Años en la Policía
+4
+Convocatorias cubiertas
+100%
+Online
+1º
+Trato directo y cercano
+Elige tu plan
+Temario, test y casos prácticos. Sin letra pequeña.
+Unificada
+Convocatoria Unificada de Aragón
+19,99€/mes
+	•	Temario completo unificada
+	•	Tests ilimitados
+	•	Casos prácticos
+	•	Exámenes oficiales
+Empezar ahora
+MÁS ELEGIDO
+Unificada + Teruel
+Todo lo anterior + temario específico Teruel
+34,99€/mes
+	•	Todo lo de Unificada
+	•	Temario municipal Teruel
+	•	Psicotécnicos
+	•	Atención personalizada
+Empezar ahora
+🔜 Zaragoza y Huesca
+Estos temarios municipales están en preparación. Déjanos tu email y te avisamos en cuanto estén listos.
+
+Avisarme
+🎁 Prueba gratis antes de decidir
+Sin tarjeta, sin compromiso. Accede a una muestra real del contenido.
+✏️ 15 preguntas test
+🔍 1 caso práctico resuelto
+📚 Resumen: la Constitución en 10 puntos
+Probar gratis
+💪 Preparación física con entrenador personal
+Un servicio aparte, para quien quiere llegar a la prueba física con garantías reales, no genéricas.
+	•	Entrenador personal especializado en pruebas de acceso
+	•	Nutricionista
+	•	Seguimiento de marcas objetivo según convocatoria
+	•	Planificación adaptada a tu nivel actual
+49€/mes
+Servicio independiente, compatible con cualquier plan
+Quiero información
+📬 Píldoras de conocimiento, 2 veces por semana
+Resúmenes, mini-test y técnicas de estudio directas a tu correo. Gratis, cancela cuando quieras.
+
+Suscribirme
+Sin spam. Puedes darte de baja cuando quieras.
+¿Tienes dudas antes de empezar?
+Escríbenos y te resolvemos cualquier pregunta sobre la preparación
+info@academiaplaragon.com
+AcademiaPL Aragón — Preparación de oposiciones a Policía Local
+Unificada · Zaragoza · Huesca · Teruel
+info@academiaplaragon.com
+© 2026 AcademiaPL Aragón
